@@ -17,8 +17,6 @@ import net.minecraftforge.client.event.RenderLevelStageEvent;
 import net.minecraftforge.common.util.Lazy;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.network.NetworkEvent;
 import org.enginehub.worldeditcui.WorldEditCUI;
 import org.enginehub.worldeditcui.config.CUIConfiguration;
 import org.enginehub.worldeditcui.event.listeners.CUIListenerChannel;
@@ -32,7 +30,6 @@ import org.lwjgl.glfw.GLFW;
 import org.spongepowered.asm.mixin.MixinEnvironment;
 
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
 import java.util.List;
 
 public class WorldEditCUIForgeClient {
@@ -122,8 +119,6 @@ public class WorldEditCUIForgeClient {
             if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_PARTICLES) {
                 boolean advancedTranslucency = ((LevelRendererAccessor)event.getLevelRenderer()).getTransparencyChain() != null;
 
-            } else if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_LEVEL) {
-
             }
         }
     }
@@ -140,7 +135,7 @@ public class WorldEditCUIForgeClient {
 
             while (this.keyBindClearSel.get().consumeClick()) {
                 if (mc.player != null) {
-                    mc.player.connection.sendUnsignedCommand("/sel");
+                    mc.player.commandUnsigned("/sel");
                 }
 
                 if (config.isClearAllOnKey()) {
@@ -163,7 +158,7 @@ public class WorldEditCUIForgeClient {
                 this.helo(mc.getConnection());
                 this.delayedHelo = WorldEditCUIForgeClient.DELAYED_HELO_TICKS;
                 if (mc.player != null && config.isPromiscuous()) {
-                    mc.player.connection.sendUnsignedCommand("we cui"); // Tricks WE to send the current selection
+                    mc.player.commandUnsigned("we cui"); // Tricks WE to send the current selection
                 }
             }
 
