@@ -104,6 +104,8 @@ public final class WorldEditCUIFabric implements ModInitializer {
         });
         WorldRenderEvents.LAST.register(ctx -> {
             if (!ctx.advancedTranslucency()) {
+                this.onPostRenderEntities(ctx);
+                /*
                 try {
                     RenderSystem.getModelViewStack().pushPose();
                     RenderSystem.getModelViewStack().mulPoseMatrix(ctx.matrixStack().last().pose());
@@ -113,6 +115,7 @@ public final class WorldEditCUIFabric implements ModInitializer {
                     RenderSystem.getModelViewStack().popPose();
                     RenderSystem.applyModelViewMatrix();
                 }
+                 */
             }
         });
     }

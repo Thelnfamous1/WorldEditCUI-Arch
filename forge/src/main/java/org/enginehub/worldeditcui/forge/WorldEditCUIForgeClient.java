@@ -223,6 +223,8 @@ public class WorldEditCUIForgeClient {
     public void onWorldRenderEventLast(PoseStack poseStack, float partialTick, boolean advancedTranslucency) {
         if (controller == null) return;
         if (!advancedTranslucency) {
+            this.onPostRenderEntities(partialTick);
+            /*
             try {
                 RenderSystem.getModelViewStack().pushPose();
                 RenderSystem.getModelViewStack().mulPoseMatrix(poseStack.last().pose());
@@ -232,6 +234,7 @@ public class WorldEditCUIForgeClient {
                 RenderSystem.getModelViewStack().popPose();
                 RenderSystem.applyModelViewMatrix();
             }
+             */
         }
     }
 
